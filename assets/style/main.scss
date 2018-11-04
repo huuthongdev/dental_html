@@ -16,6 +16,7 @@ $zindexSidebar: 101;
 
 @mixin btnFocus($color) {
     &:focus {
+        outline: none;
         box-shadow: 0px 0px 10px rgba($color: $color, $alpha: 1);
     }
 }
@@ -31,6 +32,23 @@ html, body {
     color: $dark;
     font-weight: 500;
     background: $light;
+
+    // ============================ INPUT STYLE ================================
+    input, select, area {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+        color: $dark;
+        font-weight: 500;
+    }
+    // ============================ End INPUT STYLE ============================
+
+    // ============================ LIST STYLE ================================
+    ul {
+       list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+    }
+    // ============================ End LIST STYLE ============================
 
     // ============================ TYPEGRAPHY STYLE ================================
     small {
@@ -79,7 +97,7 @@ html, body {
                     .percent {
                         background: linear-gradient(to right, #DD5D89, #F6BA97, #DD5D89);
                         background-size: 400% 400%;
-                        animation: backgroundGradientAnimate 3s ease infinite;
+                        animation: backgroundGradientAnimate 9s ease infinite;
                     }
                 }
 
@@ -87,7 +105,7 @@ html, body {
                     .percent {
                         background: linear-gradient(to right, #9CE89C, #23ACFF, #9CE89C);
                         background-size: 400% 400%;
-                        animation: backgroundGradientAnimate 3s ease infinite;
+                        animation: backgroundGradientAnimate 9s ease infinite;
                     }
                 }
 
@@ -95,7 +113,7 @@ html, body {
                     .percent {
                         background: linear-gradient(to right, #A890D3, #EDBAE6, #A890D3);
                         background-size: 400% 400%;
-                        animation: backgroundGradientAnimate 3s ease infinite;
+                        animation: backgroundGradientAnimate 9s ease infinite;
                     }
                 }
 
@@ -103,7 +121,7 @@ html, body {
                     .percent {
                         background: linear-gradient(to right, #23ACFF, #00FFFF, #23ACFF);
                         background-size: 400% 400%;
-                        animation: backgroundGradientAnimate 3s ease infinite;
+                        animation: backgroundGradientAnimate 9s ease infinite;
                     }
                 }
 
@@ -184,19 +202,161 @@ html, body {
         padding-right: 25px;
         @include sidebarCollapseTransition;
 
-        .cpn-title {
-            font-size: 1.142rem;
-            font-weight: 600;
-            padding: 15px;
+        .cpn-head {
+            margin-bottom: 15px;
 
-            svg {
-                height: 16px;
-                transform: translateY(2px);
-                margin-right: 5px;
+            .cpn-title {
+                font-size: 1.142rem;
+                font-weight: 600;
+    
+                svg {
+                    height: 16px;
+                    transform: translateY(2px);
+                    margin-right: 5px;
+                }
+            }
+    
+            .cpn-tools-list {
+                text-align: right;
+            }
+        }   
+        
+        ul.cpn-sub-menu {
+            border-bottom: 1px solid rgba($color: $grey, $alpha: 0.2);
+            margin-bottom: 30px;
+            padding: 0px 15px;
+
+            li {
+                display: inline-block;
+                padding: 10px 15px;
+                margin-right: 10px;
+                cursor: pointer;
+
+                &.active {
+                    border-bottom: 3px solid $blue;
+                    cursor: default;
+
+                    &:hover {
+                        border-radius: 0px;
+                        background: none;
+                    }
+                }
+
+                &:hover {
+                    border-radius: 300px;
+                    @include bgLighting($grey);
+                }
+            }
+        }
+
+        .cpn-table-tools {
+            margin-bottom: 30px;
+            padding: 0px 15px;
+
+            div { 
+                display: inline-block; 
+                margin-right: 7px;
+            }
+
+            .tool-search {
+                position: relative;
+
+                input {
+                    padding: 10px 15px;
+                    border: 0px;
+                    border-radius: 300px;
+                    padding-right: 25px;
+                    
+                    @include btnFocus($blue);
+                }
+
+                svg {
+                    position: absolute;
+                    height: 12px;
+                    width: 12px;
+                    top: 50%; transform: translateY(-50%);
+                    right: 10px;
+                }
+            }
+
+            .tool-select {
+                background: $white;
+                border-radius: 300px;
+                padding: 10px 15px;
+
+                select {
+                    height: 100%;
+                    border: 0px;
+                    background: none;
+                    min-width: 140px;
+
+                    &:focus { outline: none; }
+                }
+            }
+
+            .tool-reset {
+                padding: 10px 15px;
+                background: $dark;
+                text-align: center;
+                border-radius: 300px;
+                color: $white;
+                font-weight: 500;
+                cursor: pointer;
+
+                &:hover {
+                    box-shadow: 0px 0px 10px rgba($color: $dark, $alpha: 1);
+                }
             }
         }
     }
     // ============================ End COMPONENTS WRAPER STYLE ============================
+
+    // ============================ CPN FORM STYLE ================================
+    .cpn-form {
+        background: $white;
+        box-shadow: $boxShadow;
+        border-radius: $borderRadius;
+        padding: 15px 0px;
+
+        button {
+            margin-right: 5px;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        .cpn-form-title {
+            color: $blue;
+            font-weight: 600;
+
+            svg {
+                transform: translateY(2px);
+                margin-right: 5px;
+            }
+        }
+
+        .cpn-form-close {
+            position: relative;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: inline-block;
+            padding: 5px;
+            border-radius: 50%;
+
+            svg {
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            &:hover, &:focus {
+                @include bgLighting($grey);
+            }
+        }
+    }
+    // ============================ End CPN FORM STYLE ============================
 
     // ============================ SIDEBAR STYLE ================================
     .sidebar {
@@ -360,6 +520,14 @@ html, body {
                             color: $white;
                             font-size: 9px;
                             font-weight: 600;
+                            animation: totalNotificationsAnimate 1s ease-in-out infinite;
+                            box-shadow: 0px 0px 10px $red;
+                        }
+
+                        @keyframes totalNotificationsAnimate {
+                            0% { box-shadow: 0px 0px 0px $red; }
+                            50% { box-shadow: 0px 0px 10px $red; }
+                            100% { box-shadow: 0px 0px 0px $red; }
                         }
                     }
                 }
@@ -438,15 +606,20 @@ html, body {
     }
     // ============================ End EXTENDS STYLE ============================
 
-    // ============================ BUTTON STYLE ================================
+    // ============================ style ================================
     .btn {
         position: relative;
         border-radius: 5px;
-        padding: 0px 15px;
+        padding: 0px 25px;
         height: 35px;
         cursor: pointer;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 1rem;
+
+        svg {
+            transform: translateY(3px);
+            margin-right: 5px;
+        }
 
         &.w-100 {
             width: 100%;
@@ -488,13 +661,14 @@ html, body {
         }
 
         &.outline-grey {
+            opacity: 0.5;
             background: none;
             border: 1px solid $grey;
             color: $grey;
             @include btnFocus($grey);
         }
     }
-    // ============================ End BUTTON STYLE ============================
+    // ============================ End style ============================
 
     // ============================ LOADING ICON STYLE ================================
     $base-line-height: 20px;
@@ -551,7 +725,11 @@ html, body {
         .form-group {
             width: 100%;
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+
+            &.icon input {
+                padding-right: 40px;
+            }
 
             &.no-label {
                 svg {
@@ -582,7 +760,7 @@ html, body {
                 font-size: 1rem;
                 font-weight: 500;
                 padding: 0px 15px;
-                padding-right: 45px;
+                // padding-right: 45px;
                 color: $dark;
             }
 
@@ -647,6 +825,7 @@ html, body {
 
     // ============================ PAGING STYLE ================================
     .paging {
+        margin: 15px 0px;
         width: 100%;
         text-align: center;
 
